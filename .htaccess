@@ -1,0 +1,4 @@
+RewriteEngine on
+# RewriteCond %{HTTP_HOST} ^.*bh-awp-auto-generate-woocommerce-coupons$ [NC,OR]
+RewriteCond %{REQUEST_URI} !wordpress/
+RewriteRule (.*) wordpress/$1 [L]
