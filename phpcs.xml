@@ -21,8 +21,8 @@
     <exclude-pattern>/wp-content/</exclude-pattern>
 
     <rule ref="Squiz.PHP.DisallowMultipleAssignments.Found">
-        <exclude-pattern>bh-awp-auto-generate-woocommerce-coupons.php</exclude-pattern>
-        <exclude-pattern>class-bh-awp-auto-generate-woocommerce-coupons.php</exclude-pattern>
+        <exclude-pattern>bh-awp-auto-register-affiliatewp-users-on-first-url-use.php</exclude-pattern>
+        <exclude-pattern>class-bh-awp-auto-register-affiliatewp-users-on-first-url-use.php</exclude-pattern>
     </rule>
 
 </ruleset>

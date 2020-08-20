@@ -6,14 +6,14 @@
  *
  * @link              http://example.com
  * @since             1.0.0
- * @package           BH_AWP_Auto_Generate_WooCommerce_Coupons
+ * @package           BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
  *
  * @see https://github.com/pablo-sg-pacheco/wp-namespace-autoloader/
  */
 
-namespace BH_AWP_Auto_Generate_WooCommerce_Coupons;
+namespace BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use;
 
-use BH_AWP_Auto_Generate_WooCommerce_Coupons\Pablo_Pacheco\WP_Namespace_Autoloader\WP_Namespace_Autoloader;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\Pablo_Pacheco\WP_Namespace_Autoloader\WP_Namespace_Autoloader;
 
 
 $class_map_file = __DIR__ . '/autoload_classmap.php';
@@ -34,7 +34,7 @@ if ( file_exists( $class_map_file ) ) {
 }
 
 // The plugin-scoped namespace for composer required libraries, as specified in composer.json Mozart config.
-$dep_namespace = 'BH_AWP_Auto_Generate_WooCommerce_Coupons';
+$dep_namespace = 'BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use';
 // The Mozart config `dep_directory` adjusted for relative path.
 $dep_directory = '/vendor/';
 

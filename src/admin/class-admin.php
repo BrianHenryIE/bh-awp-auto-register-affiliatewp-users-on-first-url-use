@@ -5,13 +5,13 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    BH_AWP_Auto_Generate_WooCommerce_Coupons
- * @subpackage BH_AWP_Auto_Generate_WooCommerce_Coupons/admin
+ * @package    BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
+ * @subpackage BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use/admin
  */
 
-namespace BH_AWP_Auto_Generate_WooCommerce_Coupons\admin;
+namespace BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\admin;
 
-use BH_AWP_Auto_Generate_WooCommerce_Coupons\WPPB\WPPB_Object;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\WPPB\WPPB_Object;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -19,8 +19,8 @@ use BH_AWP_Auto_Generate_WooCommerce_Coupons\WPPB\WPPB_Object;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    BH_AWP_Auto_Generate_WooCommerce_Coupons
- * @subpackage BH_AWP_Auto_Generate_WooCommerce_Coupons/admin
+ * @package    BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
+ * @subpackage BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use/admin
  * @author     Brian Henry <BrianHenryIE@gmail.com>
  */
 class Admin extends WPPB_Object {
@@ -44,7 +44,7 @@ class Admin extends WPPB_Object {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bh-awp-auto-generate-woocommerce-coupons-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bh-awp-auto-register-affiliatewp-users-on-first-url-use-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -67,7 +67,7 @@ class Admin extends WPPB_Object {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bh-awp-auto-generate-woocommerce-coupons-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bh-awp-auto-register-affiliatewp-users-on-first-url-use-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 

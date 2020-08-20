@@ -17,6 +17,6 @@ modules:
             tablePrefix: "%TEST_TABLE_PREFIX%"
             domain: "%TEST_SITE_WP_DOMAIN%"
             adminEmail: "%TEST_SITE_ADMIN_EMAIL%"
-            title: "bh-awp-auto-generate-woocommerce-coupons"
-            plugins: ['bh-awp-auto-generate-woocommerce-coupons/bh-awp-auto-generate-woocommerce-coupons.php']
-            activatePlugins: ['bh-awp-auto-generate-woocommerce-coupons/bh-awp-auto-generate-woocommerce-coupons.php']
+            title: "bh-awp-auto-register-affiliatewp-users-on-first-url-use"
+            plugins: ['bh-awp-auto-register-affiliatewp-users-on-first-url-use/bh-awp-auto-register-affiliatewp-users-on-first-url-use.php']
+            activatePlugins: ['bh-awp-auto-register-affiliatewp-users-on-first-url-use/bh-awp-auto-register-affiliatewp-users-on-first-url-use.php']

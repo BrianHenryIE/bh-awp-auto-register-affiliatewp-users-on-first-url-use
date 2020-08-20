@@ -1,6 +1,6 @@
 <?php
 /**
- * @package           BH_AWP_Auto_Generate_WooCommerce_Coupons
+ * @package           BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
  */
 
 $GLOBALS['project_root_dir']   = $project_root_dir  = dirname( __FILE__, 2 );

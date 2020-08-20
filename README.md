@@ -1,14 +1,35 @@
-# BH AWP Auto Generate WooCommerce Coupons
+# BH AWP Auto Register AffiliateWP Users on First URL Use
+
+## Introduction
+
+### Goal:
+
+Add an affiliate URL to every WooCommerce order complete email for customers to share with their friends. When the URL is used for the first time, the affiliate should be registered and the discount applied to the customer's cart.
+
+### Steps:
+ 
+* Automatically register a WordPress user as an affiliate when their affiliate link is used for the first time. 
+* Create a WooCommerce coupon with the same name, associating it with the same user. 
+* Apply the coupon to the customer’s cart. 
+
+## Status
+
+*Not yet in use.*
+
+* Acceptance tests show the happy path working.
+
 
 ## Contributing
 
 Clone this repo, open PhpStorm, then run `composer install` to install the dependencies.
 
 ```
-git clone https://github.com/brianhenryie/plugin_slug.git;
+git clone https://github.com/brianhenryie/bh-awp-auto-register-affiliatewp-users-on-first-url-use.git;
 open -a PhpStorm ./;
 composer install;
 ```
+
+Then add AffiliateWP to `wp-content/plugins` directory.
 
 For integration and acceptance tests, a local webserver must be running with `localhost/plugin_slug/` pointing at the root of the repo. MySQL must also be running locally – with two databases set up with:
 

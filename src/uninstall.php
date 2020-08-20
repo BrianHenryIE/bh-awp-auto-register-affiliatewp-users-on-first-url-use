@@ -21,10 +21,14 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    BH_AWP_Auto_Generate_WooCommerce_Coupons
+ * @package    BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
  */
 
 // If uninstall not called from WordPress, then exit.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
+// No settings yet.
+
+// Deleting the coupons etc seems like a bad idea.

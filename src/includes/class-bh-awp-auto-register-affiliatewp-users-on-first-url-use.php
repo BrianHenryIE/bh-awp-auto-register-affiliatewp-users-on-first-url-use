@@ -8,17 +8,17 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    BH_AWP_Auto_Generate_WooCommerce_Coupons
- * @subpackage BH_AWP_Auto_Generate_WooCommerce_Coupons/includes
+ * @package    BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
+ * @subpackage BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use/includes
  */
 
-namespace BH_AWP_Auto_Generate_WooCommerce_Coupons\includes;
+namespace BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\includes;
 
-use BH_AWP_Auto_Generate_WooCommerce_Coupons\admin\Admin;
-use BH_AWP_Auto_Generate_WooCommerce_Coupons\frontend\Frontend;
-use BH_AWP_Auto_Generate_WooCommerce_Coupons\woocommerce\Discounts;
-use BH_AWP_Auto_Generate_WooCommerce_Coupons\WPPB\WPPB_Loader_Interface;
-use BH_AWP_Auto_Generate_WooCommerce_Coupons\WPPB\WPPB_Object;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\admin\Admin;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\frontend\Frontend;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\woocommerce\Discounts;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\WPPB\WPPB_Loader_Interface;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\WPPB\WPPB_Object;
 
 /**
  * The core plugin class.
@@ -30,11 +30,11 @@ use BH_AWP_Auto_Generate_WooCommerce_Coupons\WPPB\WPPB_Object;
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    BH_AWP_Auto_Generate_WooCommerce_Coupons
- * @subpackage BH_AWP_Auto_Generate_WooCommerce_Coupons/includes
+ * @package    BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
+ * @subpackage BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use/includes
  * @author     Brian Henry <BrianHenryIE@gmail.com>
  */
-class BH_AWP_Auto_Generate_WooCommerce_Coupons extends WPPB_Object {
+class BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use extends WPPB_Object {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -58,12 +58,12 @@ class BH_AWP_Auto_Generate_WooCommerce_Coupons extends WPPB_Object {
 	 * @param WPPB_Loader_Interface $loader The WPPB class which adds the hooks and filters to WordPress.
 	 */
 	public function __construct( $loader ) {
-		if ( defined( 'BH_AWP_AUTO_GENERATE_WOOCOMMERCE_COUPONS_VERSION' ) ) {
-			$this->version = BH_AWP_AUTO_GENERATE_WOOCOMMERCE_COUPONS_VERSION;
+		if ( defined( 'BH_AWP_AUTO_REGISTER_AFFILIATEWP_USERS_ON_FIRST_URL_USE_VERSION' ) ) {
+			$this->version = BH_AWP_AUTO_REGISTER_AFFILIATEWP_USERS_ON_FIRST_URL_USE_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'bh-awp-auto-generate-woocommerce-coupons';
+		$this->plugin_name = 'bh-awp-auto-register-affiliatewp-users-on-first-url-use';
 
 		parent::__construct( $this->plugin_name, $this->version );
 
@@ -84,9 +84,8 @@ class BH_AWP_Auto_Generate_WooCommerce_Coupons extends WPPB_Object {
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
-	 * @access   private
 	 */
-	private function set_locale() {
+	protected function set_locale() {
 
 		$plugin_i18n = new I18n();
 
@@ -99,9 +98,8 @@ class BH_AWP_Auto_Generate_WooCommerce_Coupons extends WPPB_Object {
 	 * of the plugin.
 	 *
 	 * @since    1.0.0
-	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	protected function define_admin_hooks() {
 
 		$plugin_admin = new Admin( $this->get_plugin_name(), $this->get_version() );
 
@@ -115,9 +113,8 @@ class BH_AWP_Auto_Generate_WooCommerce_Coupons extends WPPB_Object {
 	 * of the plugin.
 	 *
 	 * @since    1.0.0
-	 * @access   private
 	 */
-	private function define_frontend_hooks() {
+	protected function define_frontend_hooks() {
 
 		$plugin_frontend = new Frontend( $this->get_plugin_name(), $this->get_version() );
 
@@ -125,13 +122,16 @@ class BH_AWP_Auto_Generate_WooCommerce_Coupons extends WPPB_Object {
 
 	}
 
+	/**
+	 * Register hooks for creating and applying WooCommerce coupons.
+	 */
 	protected function define_woocommerce_hooks() {
 
 		$woocommerce_discounts = new Discounts( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'plugins_loaded', $woocommerce_discounts, 'create_coupon', 7 );
+		$this->loader->add_action( 'wp_loaded', $woocommerce_discounts, 'create_coupon', 7 );
 
-		$this->loader->add_action( 'plugins_loaded', $woocommerce_discounts, 'apply_coupon', 8 );
+		$this->loader->add_action( 'wp_loaded', $woocommerce_discounts, 'apply_coupon', 8 );
 
 	}
 

@@ -1,6 +1,6 @@
 {
-    "name": "your-domain/bh-awp-auto-generate-woocommerce-coupons",
-    "description": "This is a short description of what plugin_title does.",
+    "name": "brianhenryie/bh-awp-auto-register-affiliatewp-users-on-first-url-use",
+    "description": "Allows giving all users affiliate links, then registers them with AffiliateWP the first time their URL is used, also creates and applies WooCommerce coupons.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0+-or-later",
     "authors": [
@@ -39,12 +39,13 @@
     "require": {
         "brianhenryie/wppb-lib": "dev-master",
         "php": ">=7.2",
-        "pablo-sg-pacheco/wp-namespace-autoloader": "dev-master"
+        "pablo-sg-pacheco/wp-namespace-autoloader": "dev-master",
+        "katzgrau/klogger": "dev-master"
     },
     "require-dev": {
         "wpackagist-theme/twentytwenty":"*",
         "cweagans/composer-patches": "~1.0",
-        "coenjacobs/mozart": "0.6.0-beta-3",
+        "coenjacobs/mozart": "dev-master",
         "dealerdirect/phpcodesniffer-composer-installer": "*",
         "wp-coding-standards/wpcs": "*",
         "wordpress/wordpress": "^5.4",
@@ -67,23 +68,37 @@
         "wpackagist-theme/storefront": "*"
     },
     "extra": {
+        "patches": {
+            "coenjacobs/mozart": {
+                "DIRECTORY_SEPARATOR": "https://github.com/coenjacobs/mozart/pull/61.patch",
+                "Generate classmap": "https://github.com/coenjacobs/mozart/pull/60.patch",
+                "Delete empty directories": "https://github.com/coenjacobs/mozart/pull/59.patch"
+            }
+        },
         "mozart": {
-            "dep_namespace": "BH_AWP_Auto_Generate_WooCommerce_Coupons\\",
+            "dep_namespace": "BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\\",
             "dep_directory": "/src/vendor/",
-            "classmap_prefix": "BH_AWP_Auto_Generate_WooCommerce_Coupons_",
+            "classmap_prefix": "BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use_",
             "classmap_directory": "/src/dependencies/",
-            "delete_vendor_directories": false
+            "delete_vendor_directories": false,
+            "override_autoload": {
+                "katzgrau/klogger": {
+                    "psr-4": {
+                        "Katzgrau\\KLogger\\": "src/"
+                    }
+                }
+            }
         },
         "symlinks": {
             "wp-content": "wordpress/wp-content",
-            "src": "wp-content/plugins/bh-awp-auto-generate-woocommerce-coupons"
+            "src": "wp-content/plugins/bh-awp-auto-register-affiliatewp-users-on-first-url-use"
         },
         "phpstorm": {
             "exclude_folders": {
                 "folders": [
                     "vendor/wordpress/wordpress/src",
                     "vendor/wordpress/wordpress/build",
-                    "wp-content/plugins/bh-awp-auto-generate-woocommerce-coupons",
+                    "wp-content/plugins/bh-awp-auto-register-affiliatewp-users-on-first-url-use",
                     "wordpress/wp-content/plugins"
                 ],
                 "include_folders": [

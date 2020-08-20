@@ -5,13 +5,14 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    BH_AWP_Auto_Generate_WooCommerce_Coupons
- * @subpackage BH_AWP_Auto_Generate_WooCommerce_Coupons/frontend
+ * @package    BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
+ * @subpackage BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use/frontend
  */
 
-namespace BH_AWP_Auto_Generate_WooCommerce_Coupons\frontend;
+namespace BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\frontend;
 
-use BH_AWP_Auto_Generate_WooCommerce_Coupons\WPPB\WPPB_Object;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\Logger;
+use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\WPPB\WPPB_Object;
 
 /**
  * The public-facing functionality of the plugin.
@@ -19,8 +20,8 @@ use BH_AWP_Auto_Generate_WooCommerce_Coupons\WPPB\WPPB_Object;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the frontend-facing stylesheet and JavaScript.
  *
- * @package    BH_AWP_Auto_Generate_WooCommerce_Coupons
- * @subpackage BH_AWP_Auto_Generate_WooCommerce_Coupons/frontend
+ * @package    BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
+ * @subpackage BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use/frontend
  * @author     Brian Henry <BrianHenryIE@gmail.com>
  */
 class Frontend extends WPPB_Object {
@@ -31,7 +32,7 @@ class Frontend extends WPPB_Object {
 	 * E.g. If a user visits https://example.org/ref/brianhenryie but brianhenryie is a WordPress user but not registered
 	 * with AffiliateWP, this method takes care of that.
 	 *
-	 * http://localhost/bh-awp-auto-generate-woocommerce-coupons/?ref=bob
+	 * http://localhost/bh-awp-auto-register-affiliatewp-users-on-first-url-use/?ref=bob
 	 *
 	 * 1. Checks the request is an affiliate link.  @see Affiliate_WP_Tracking::get_referral_var()
 	 * 2.
@@ -44,14 +45,15 @@ class Frontend extends WPPB_Object {
 	public function register_missing_affiliates() {
 
 		// TODO: ignore anything POST.
-		if( is_admin() || wp_doing_ajax() || wp_doing_cron() || isset( $_REQUEST['wc-ajax'] ) ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || isset( $_REQUEST['wc-ajax'] ) ) {
 			return;
 		}
 
 		// Since this isn't hooked on an AffiliateWP action, we need to check.
 		if ( ! function_exists( 'affiliate_wp' ) ) {
 
-			error_log( 'affiliate_wp() not available. Is it installed & active? Did we try call it too soon?' );
+			Logger::get_instance()->debug( 'affiliate_wp() not available. Is it installed & active? Did we try call it too soon?' );
 
 			return;
 		}
@@ -64,7 +66,7 @@ class Frontend extends WPPB_Object {
 		if ( ! isset( $_REQUEST[ $referral_var ] ) ) {
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			error_log( 'Not an Affiliate WP referral URL: ' . wp_json_encode( $_REQUEST ) );
+			Logger::get_instance()->debug( 'Not an Affiliate WP referral URL: ' . wp_json_encode( $_REQUEST ) );
 
 			return;
 		}
@@ -76,7 +78,7 @@ class Frontend extends WPPB_Object {
 		// If the affiliate ref is an int, then we it's likely to be accurate, we're only going to check usernames.
 		if ( is_int( $affiliate_ref ) ) {
 
-			error_log( 'Affiliate ref is an int, we don\'t care: ' . $affiliate_ref );
+			Logger::get_instance()->debug( 'Affiliate ref is an int, we don\'t care: ' . $affiliate_ref );
 
 			return;
 		}
@@ -84,7 +86,7 @@ class Frontend extends WPPB_Object {
 		// If this affiliate_ref already works, we've nothing to do.
 		if ( false !== affwp_get_affiliate( $affiliate_ref ) ) {
 
-			error_log( 'The affiliate_ref already exists: ' . $affiliate_ref );
+			Logger::get_instance()->debug( 'The affiliate_ref already exists: ' . $affiliate_ref );
 
 			return;
 		}
@@ -94,7 +96,7 @@ class Frontend extends WPPB_Object {
 		// If the user does not exist there is nothing we can do.
 		if ( false === $user ) {
 
-			error_log( 'Affiliate ref does not match a WordPress user login: ' . $affiliate_ref );
+			Logger::get_instance()->debug( 'Affiliate ref does not match a WordPress user login: ' . $affiliate_ref );
 
 			return;
 		}
@@ -105,23 +107,23 @@ class Frontend extends WPPB_Object {
 			'user_name'     => $user->user_login,
 		);
 
-		error_log( 'Registering affiliate using `affwp_add_affiliate( '. wp_json_encode( $args ) . ' )`' );
+		Logger::get_instance()->info( 'Registering affiliate using `affwp_add_affiliate( ' . wp_json_encode( $args ) . ' )`' );
 
 		// Disable the email notification to avoid a PHP fatal error.
-		// PHP Fatal error:  Uncaught Error: Call to a member function get_page_permastruct() on null in /wp-includes/link-template.php:375
-		add_filter( 'affwp_email_notification_enabled', function( $a, $b, $c ) { return false; }, 100, 3 );
+		// "PHP Fatal error:  Uncaught Error: Call to a member function get_page_permastruct() on null in /wp-includes/link-template.php:375".
+		add_filter( 'affwp_email_notification_enabled', '__return_false', 100 ); // ,3 ?
 
 		$new_affiliate_id = affwp_add_affiliate( $args );
 
 		if ( false === $new_affiliate_id ) {
 
-			error_log( 'Failed to register affiliate.' );
+			Logger::get_instance()->error( 'Failed to register affiliate.' );
 
 			return;
 		}
 
 		// Success!
-		error_log( 'New affiliate registered for user ' . $user->user_login );
+		Logger::get_instance()->info( 'New affiliate registered for user ' . $user->user_login );
 
 	}
 

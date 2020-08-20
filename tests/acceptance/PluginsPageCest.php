@@ -17,7 +17,7 @@ class PluginsPageCest
 
     	$I->amOnPluginsPage();
 
-    	$I->canSee('BH AWP Auto Generate WooCommerce Coupons' );
+    	$I->canSee('Auto Register AffiliateWP Users on First URL Use' );
     }
 
 }

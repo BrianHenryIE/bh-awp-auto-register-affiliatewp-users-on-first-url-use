@@ -2,11 +2,11 @@
 /**
  * Tests for I18n. Tests load_plugin_textdomain.
  *
- * @package BH_AWP_Auto_Generate_WooCommerce_Coupons
+ * @package BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use
  * @author  Brian Henry <BrianHenryIE@gmail.com>
  */
 
-namespace BH_AWP_Auto_Generate_WooCommerce_Coupons\includes;
+namespace BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\includes;
 
 /**
  * Class I18n_Test
@@ -35,18 +35,12 @@ class I18n_Test extends \Codeception\TestCase\WPTestCase {
 
 		add_filter( 'plugin_locale', $filter, 10, 2 );
 
-		/**
-		 * Get the main plugin class.
-		 *
-		 * @var BH_AWP_Auto_Generate_WooCommerce_Coupons $bh_awp_auto_generate_woocommerce_coupons
-		 */
-		$bh_awp_auto_generate_woocommerce_coupons = $GLOBALS['bh_awp_auto_generate_woocommerce_coupons'];
-		$i18n         = $bh_awp_auto_generate_woocommerce_coupons->i18n;
+		$i18n         = new I18n();
 
 		$i18n->load_plugin_textdomain();
 
 		$this->assertTrue( $called, 'plugin_locale filter not called within load_plugin_textdomain() suggesting it has not been set by the plugin.' );
-		$this->assertEquals( 'bh-awp-auto-generate-woocommerce-coupons', $actual_domain );
+		$this->assertEquals( 'bh-awp-auto-register-affiliatewp-users-on-first-url-use', $actual_domain );
 
 	}
 }
