@@ -35,6 +35,8 @@ class Discounts extends WPPB_Object {
 	 * Should really be hooked on an Affiliate WP hook but we're hooking to plugins_loaded after where we hook to
 	 * make sure the affiliate exists.
 	 *
+	 * @see affwp_do_actions() for potential hooks, but which depend on $_REQUEST.
+	 *
 	 * @see https://www.mootpoint.org/blog/create-woocommerce-coupon-programmatically/
 	 *
 	 * @hooked wp_loaded

@@ -13,7 +13,7 @@ use BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use\admin\Admin;
 /**
  * Class Develop_Test
  */
-class BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use_Develop_Test extends \Codeception\TestCase\WPTestCase {
+class BH_AWP_Auto_Register_AffiliateWP_Users_on_First_URL_Use_Test extends \Codeception\TestCase\WPTestCase {
 
 	/**
 	 * Verify admin_enqueue_scripts action is correctly added for styles, at priority 10.

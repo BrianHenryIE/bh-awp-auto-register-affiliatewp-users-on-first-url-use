@@ -45,3 +45,6 @@ wordpress
 src/vendor/
 src/dependencies/
 wp-content/
+
+
+.github/coverage.svg

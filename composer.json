@@ -65,7 +65,9 @@
         "codeception/module-cli": "^1.0",
         "codeception/util-universalframework": "^1.0",
         "wpackagist-plugin/woocommerce": "^4.3",
-        "wpackagist-theme/storefront": "*"
+        "wpackagist-theme/storefront": "*",
+        "jaschilz/php-coverage-badger": "^2.0"
+
     },
     "extra": {
         "patches": {
@@ -73,6 +75,9 @@
                 "DIRECTORY_SEPARATOR": "https://github.com/coenjacobs/mozart/pull/61.patch",
                 "Generate classmap": "https://github.com/coenjacobs/mozart/pull/60.patch",
                 "Delete empty directories": "https://github.com/coenjacobs/mozart/pull/59.patch"
+            },
+            "jaschilz/php-coverage-badger": {
+                "Allow customising the text": "https://github.com/JASchilz/PHPCoverageBadge/pull/1.patch"
             }
         },
         "mozart": {
